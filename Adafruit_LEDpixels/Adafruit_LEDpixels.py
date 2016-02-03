@@ -27,6 +27,7 @@ SPIDO = 17
 ledpixels = [0] * 25
 
 def writestrip(pixels):
+    print('writestrip('+str(pixels)+')')
     ## spidev = file("/dev/spidev0.0", "w")
     ## for i in range(len(pixels)):
     ##     spidev.write(chr((pixels[i]>>16) & 0xFF))
@@ -76,13 +77,14 @@ def rainbowCycle(pixels, wait):
 # (thats the i / strip.numPixels() part)
 # Then add in j which makes the colors go around per pixel
 # the % 96 is to make the wheel cycle around
-            setpixelcolor(pixels, i, Wheel( ((i * 256 / len(pixels)) + j) % 256) )
+            setpixelcolor(pixels, i, Wheel( ((i * 256 // len(pixels)) + j) % 256) )
         writestrip(pixels)
         time.sleep(wait)
 
-## colorwipe(ledpixels, Color(255, 0, 0), 0.05)
-## colorwipe(ledpixels, Color(0, 255, 0), 0.05)
-## colorwipe(ledpixels, Color(0, 0, 255), 0.05)
+colorwipe(ledpixels, Color(255, 0, 0), 0.05)
+colorwipe(ledpixels, Color(0, 255, 0), 0.05)
+colorwipe(ledpixels, Color(0, 0, 255), 0.05)
 
 ## while True:
-##     rainbowCycle(ledpixels, 0.00)
+for _ in range(0,3):
+    rainbowCycle(ledpixels, 0.00)
