@@ -2,22 +2,23 @@
 
 # Test code for Adafruit LED Pixels, uses hardware SPI
 
-import RPi.GPIO as GPIO, time, os
+## import RPi.GPIO as GPIO, time, os
+import time, os
 
 DEBUG = 1
-GPIO.setmode(GPIO.BCM)
+## GPIO.setmode(GPIO.BCM)
 
-def slowspiwrite(clockpin, datapin, byteout):
-    GPIO.setup(clockpin, GPIO.OUT)
-    GPIO.setup(datapin, GPIO.OUT)
-    for i in range(8):
-        if (byteout & 0x80):
-            GPIO.output(datapin, True)
-        else:
-            GPIO.output(clockpin, False)
-        byteout <<= 1
-        GPIO.output(clockpin, True)
-        GPIO.output(clockpin, False)
+## def slowspiwrite(clockpin, datapin, byteout):
+##     GPIO.setup(clockpin, GPIO.OUT)
+##     GPIO.setup(datapin, GPIO.OUT)
+##     for i in range(8):
+##         if (byteout & 0x80):
+##             GPIO.output(datapin, True)
+##         else:
+##             GPIO.output(clockpin, False)
+##         byteout <<= 1
+##         GPIO.output(clockpin, True)
+##         GPIO.output(clockpin, False)
 
 
 SPICLK = 18
@@ -26,13 +27,15 @@ SPIDO = 17
 ledpixels = [0] * 25
 
 def writestrip(pixels):
-    spidev = file("/dev/spidev0.0", "w")
-    for i in range(len(pixels)):
-        spidev.write(chr((pixels[i]>>16) & 0xFF))
-        spidev.write(chr((pixels[i]>>8) & 0xFF))
-        spidev.write(chr(pixels[i] & 0xFF))
-    spidev.close()
-    time.sleep(0.002)
+    ## print('writestrip(...)')
+    pass
+    ## spidev = file("/dev/spidev0.0", "w")
+    ## for i in range(len(pixels)):
+    ##     spidev.write(chr((pixels[i]>>16) & 0xFF))
+    ##     spidev.write(chr((pixels[i]>>8) & 0xFF))
+    ##     spidev.write(chr(pixels[i] & 0xFF))
+    ## spidev.close()
+    ## time.sleep(0.002)
 
 def Color(r, g, b):
     return ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF)
@@ -77,5 +80,5 @@ def rainbowCycle(pixels, wait):
 colorwipe(ledpixels, Color(255, 0, 0), 0.05)
 colorwipe(ledpixels, Color(0, 255, 0), 0.05)
 colorwipe(ledpixels, Color(0, 0, 255), 0.05)
-while True:
-    rainbowCycle(ledpixels, 0.00)
+## while True:
+##     rainbowCycle(ledpixels, 0.00)
