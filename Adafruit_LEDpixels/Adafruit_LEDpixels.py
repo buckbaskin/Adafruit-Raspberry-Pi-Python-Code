@@ -27,17 +27,19 @@ SPIDO = 17
 ledpixels = [0] * 25
 
 def writestrip(pixels):
-    ## print('writestrip(...)')
-    pass
+    print('writestrip('+str(pixels)+')')
     ## spidev = file("/dev/spidev0.0", "w")
     ## for i in range(len(pixels)):
     ##     spidev.write(chr((pixels[i]>>16) & 0xFF))
     ##     spidev.write(chr((pixels[i]>>8) & 0xFF))
     ##     spidev.write(chr(pixels[i] & 0xFF))
     ## spidev.close()
-    ## time.sleep(0.002)
+    time.sleep(0.002)
 
 def Color(r, g, b):
+    r = int(r)
+    g = int(g)
+    b = int(b)
     return ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF)
 
 def setpixelcolor(pixels, n, r, g, b):
@@ -84,5 +86,5 @@ colorwipe(ledpixels, Color(0, 255, 0), 0.05)
 colorwipe(ledpixels, Color(0, 0, 255), 0.05)
 
 ## while True:
-for _ in range(0,3):
+for _ in range(0,1):
     rainbowCycle(ledpixels, 0.00)
