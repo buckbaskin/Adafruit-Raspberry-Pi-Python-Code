@@ -51,6 +51,7 @@ def setpixelcolor(pixels, n, c):
     pixels[n] = c
 
 def colorwipe(pixels, c, delay):
+    print('colorwipe('+str(len(pixels))+' pixels, '+str(c)+', '+str(delay)+')')
     for i in range(len(pixels)):
         setpixelcolor(pixels, i, c)
         writestrip(pixels)
@@ -67,6 +68,7 @@ def Wheel(WheelPos):
         return Color(0, WheelPos * 3, 255 - WheelPos * 3)
 
 def rainbowCycle(pixels, wait):
+    print('rainbowCycle('+str(len(pixels))+' pixels, '+str(wait)+')')
     for j in range(256): # one cycle of all 256 colors in the wheel
         for i in range(len(pixels)):
 # tricky math! we use each pixel as a fraction of the full 96-color wheel
@@ -80,5 +82,7 @@ def rainbowCycle(pixels, wait):
 colorwipe(ledpixels, Color(255, 0, 0), 0.05)
 colorwipe(ledpixels, Color(0, 255, 0), 0.05)
 colorwipe(ledpixels, Color(0, 0, 255), 0.05)
+
 ## while True:
-##     rainbowCycle(ledpixels, 0.00)
+for _ in range(0,3):
+    rainbowCycle(ledpixels, 0.00)
